@@ -10,6 +10,16 @@
     //This new array overwrites the old one.
     //"" = a new item
   }
+  function removeTask(index) {
+    const firstPart = tasks.slice(0, index);
+    //creates a new array that includes all elements from the start of the tasks array up to (but not including) the element at index.
+
+    const secondPart = tasks.slice(index + 1);
+    //creates a new array that includes all elements from the element immediately after index to the end of the tasks array.
+
+    tasks = [...firstPart, ...secondPart];
+    //(...) is used to concatenate these two arrays, basically creating a new array out of the old one, but leaving out the element at index.
+  }
 </script>
 
 <Header />
@@ -23,6 +33,12 @@
     <input bind:value={tasks[index]} />
     <!-- binds the value of the input to the corresponding task in the tasks array, allowing for real-time updates. -->
   </div>
+
+  <button
+    on:click={() => {
+      removeTask(index);
+    }}>🗑 remove</button
+  >
 {/each}
 
 <style>
